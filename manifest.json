@@ -1,0 +1,30 @@
+{
+    "manifest_version": 2,
+
+    "name": "Emotional Usability",
+    "description": "Conduct a usability test of a webpage that takes the user's emotions into account",
+    "version": "1.0",
+
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": ["jquery-2.2.1.min.js", "content.js"]
+        }
+    ],
+
+    "browser_action": {
+        "default_icon": "icon.png",
+        // "default_popup": "popup.html",
+        "default_title": "Emotional Usability Test"
+    },
+
+    "background": {
+      "scripts": ["background.js"]
+    },
+
+    "permissions": [
+        "tabs"
+    ]
+}
