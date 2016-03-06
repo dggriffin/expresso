@@ -112,11 +112,11 @@ function takePhoto() {
     _testPost(data, function(data) {
         if (data.success) {
             console.log(data.data);
-            // _pavlokGET(function(data){
-            //     if(data.success){
-            //         console.log ("beeb");
-            //     }
-            // })
+            _pavlokGET(function(data){
+                if(data.success){
+                    console.log ("beeb");
+                }
+            })
 
         }
     })
@@ -135,8 +135,8 @@ function _testPost(file, callback){
     console.log(dataObj);
 
     $.ajax({
-        //url: "https://posttestserver.com/post.php",
-        url : API_URL,
+        url: "https://posttestserver.com/post.php",
+        //url : API_URL,
         data: JSON.stringify(dataObj),
         datatype: 'json',
         processData: false,
