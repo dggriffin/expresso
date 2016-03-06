@@ -10,6 +10,10 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   if (isStarted) {
     clearTimeout(timer);
     isStarted = false;
+      chrome.browserAction.setIcon({
+          path : "emptyCup.png",
+          tabId: tab.id
+      });
   }
   else {
     isStarted = true;
@@ -18,6 +22,10 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       var activeTab = tabs[0];
       chrome.tabs.sendMessage(activeTab.id, {"message": "init_video"});
+      chrome.browserAction.setIcon({
+          path : "fullCup.png",
+          tabId: activeTab.id
+      });
     });
   }
 });
@@ -30,6 +38,10 @@ chrome.runtime.onMessage.addListener(
           chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             var activeTab = tabs[0];
             chrome.tabs.sendMessage(activeTab.id, {"message": "init_video"});
+            chrome.browserAction.setIcon({
+                path : "fullCup.png",
+                tabId: activeTab.id
+            });
           });
       }
     }
@@ -47,5 +59,9 @@ function startTimer() {
 chrome.tabs.onCreated.addListener(function(tab) {
   if(isStarted) {
       chrome.tabs.sendMessage(tab.id, {"message": "init_video"});
+      chrome.browserAction.setIcon({
+          path : "fullCup.png",
+          tabId: tab.id
+      });
   }
 });

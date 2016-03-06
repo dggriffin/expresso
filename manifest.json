@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
 
-    "name": "Emotional Usability",
-    "description": "Conduct a usability test of a webpage that takes the user's emotions into account",
+    "name": "expresso",
+    "description": "Keep yourself awake and productive with alerts, beeps, and shocks!",
     "version": "1.0",
 
     "content_scripts": [
@@ -15,9 +15,9 @@
     ],
 
     "browser_action": {
-        "default_icon": "icon.png",
+        "default_icon": "emptyCup.png",
         // "default_popup": "popup.html",
-        "default_title": "Emotional Usability Test"
+        "default_title": "Shocking Sleep Prevention"
     },
 
     "background": {

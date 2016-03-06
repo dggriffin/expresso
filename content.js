@@ -7,6 +7,8 @@ var video;
 var width = 320;
 var height = 200; //cwkTODO compute this
 
+var API_URL = "https://10.10.23.250:3000/emotion";
+
 
 var isStarted = false;
 var isInitialized = false;
@@ -99,7 +101,8 @@ function takePhoto() {
     canvas.width = width;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var data = canvas.toDataURL('image/png');
+    var data = canvas.toDataURL('image/jpeg', 0.5);
+    data = data.split(',')[1];
 
     // Add a new photo!
     // var photoElement = '<img class="photo" alt="photo">';
@@ -109,11 +112,11 @@ function takePhoto() {
     _testPost(data, function(data) {
         if (data.success) {
             console.log(data.data);
-            _pavlokGET(function(data){
-                if(data.success){
-                    console.log ("beeb");
-                }
-            })
+            // _pavlokGET(function(data){
+            //     if(data.success){
+            //         console.log ("beeb");
+            //     }
+            // })
 
         }
     })
@@ -124,13 +127,16 @@ function _testPost(file, callback){
     // formData.append("image", _dataURItoBlob(file), "imagefile.png");
 
     var dataObj = {
-        uri : file,
+        image : file,
         width: width,
         height: height
     }
 
+    console.log(dataObj);
+
     $.ajax({
-        url: "https://posttestserver.com/post.php",
+        //url: "https://posttestserver.com/post.php",
+        url : API_URL,
         data: JSON.stringify(dataObj),
         datatype: 'json',
         processData: false,
@@ -138,7 +144,7 @@ function _testPost(file, callback){
         type: 'POST',
         success: function(data) {
           if(callback){
-            callback({success: true, data: TEST_EMOTION_OBJECT});
+            callback({success: true, data: data});
           }
         }
     });
